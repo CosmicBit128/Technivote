@@ -1,5 +1,5 @@
 // const ROOT = "https://adegdansk.pl/cosmic/technivote/api.php";
-const ROOT = "http://localhost/api.php";
+const ROOT = "http://localhost/api/api.php";
 
 /**
  * Fetches JSON from an URL
@@ -17,7 +17,7 @@ async function fetch_json(baseUrl) {
         method: "GET",
         mode: "cors",
         cache: "no-store",
-        credentials: "omit",
+        credentials: "include",
         headers: {
             Accept: "application/json",
         },
@@ -32,4 +32,12 @@ async function fetch_json(baseUrl) {
 
 export async function getIdeas() {
     return await fetch_json(`${ROOT}?get_ideas`);
+}
+
+export async function castVote(id, voteYes) {
+    return await fetch_json(`${ROOT}?cast_vote=${id}&yes=${voteYes?1:0}`);
+}
+
+export async function logout() {
+    return await fetch_json(`${ROOT}?logout`);
 }

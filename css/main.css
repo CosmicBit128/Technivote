@@ -44,12 +44,26 @@
 }
 
 .ideaVotes > button.voteYes {
-    border-color: var(--vote-yes-color);
-    box-shadow: inset 0 1px var(--vote-yes-color),inset 0 -1px #ffffff0f,0 8px 24px #00000059;
+    border-color: #21e051;
 }
 .ideaVotes > button.voteNo {
-    border-color: var(--vote-no-color);
-    box-shadow: inset 0 1px var(--vote-no-color),inset 0 -1px #ffffff0f,0 8px 24px #00000059;
+    border-color: #f81e1e;
+}
+.ideaVotes > button.voteYes:not(:disabled) {
+    box-shadow: 0 0 8px #21e05140, inset 0 0 8px #21e05140;
+}
+.ideaVotes > button.voteNo:not(:disabled) {
+    box-shadow: 0 0 8px #f81e1e60, inset 0 0 8px #f81e1e60;
+}
+.ideaVotes > button.voteYes.voted {
+    background-color: #21e05120;
+    color: #21e051;
+    cursor: default;
+}
+.ideaVotes > button.voteNo.voted {
+    background-color: #f81e1e20;
+    color: #f81e1e;
+    cursor: default;
 }
 
 

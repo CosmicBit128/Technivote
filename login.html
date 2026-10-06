@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technivote - Logowanie</title>
 
+    <script src="js/login.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
@@ -12,52 +13,20 @@
 <nav>
     <h1 id="title">Technivote</h1>
 </nav>
-<main>
-    <div id="loginForm" class="glass">
-        <h2>Logowanie</h2>
-        <label class="row">
-            <span>Login</span>
-            <input type="text" id="login" class="glass">
-        </label>
-        <label class="row">
-            <span>Hasło</span>
-            <input type="password" id="pass" class="glass">
-        </label>
-        <button id="submitButton" class="glass btn">Zaloguj się</button>
-    </div>
-</main>
-
-<script>
-    const loginInput = document.getElementById("login");
-    const passwordInput = document.getElementById("pass");
-
-    document.getElementById("submitButton").addEventListener("click", () => {
-        // fetch("https://adegdansk.pl/cosmic/technivote/login.php", {
-        fetch("http://localhost/login.php", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            // Automatically converted to "username=example&password=password"
-            body: new URLSearchParams({
-                login: loginInput.value,
-                pass: passwordInput.value
-            }),
-        }).then((value) => {
-            value.text().then((res)=> {
-                console.log(res);
-                if (res.status === "error") {
-                    alert("Error: " + res.error);
-                } else if (res.status === "yey") {
-                    window.location.href = "/";
-                } else {
-                    alert("cosmicbit cos skopal");
-                    console.log(res)
-                }
-            })
-        });
-    });
-</script>
+    <main>
+        <div id="loginForm" class="glass">
+            <h2>Logowanie</h2>
+            <label class="row">
+                <span>Login</span>
+                <input type="text" id="login" class="glass">
+            </label>
+            <label class="row">
+                <span>Hasło</span>
+                <input type="password" id="pass" class="glass">
+            </label>
+            <p id="error"></p>
+            <button id="submitButton" class="glass btn">Zaloguj się</button>
+        </div>
+    </main>
 </body>
 </html>

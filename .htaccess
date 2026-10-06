@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^login\.html$ /login [L]
+RewriteRule ^admin-panel\.php$ /admin-panel [L]
+RewriteRule ^give-idea\.php$ /give-idea [L]

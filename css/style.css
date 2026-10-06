@@ -29,6 +29,16 @@
     box-shadow: inset 0 1px #ffffff38, inset 0 -1px #ffffff0f, 0 8px 24px #00000059;
 }
 
+.pill {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    text-align: center;
+    border-radius: 999px;
+    padding-inline: 1rem;
+    padding-block: 0.25rem;
+}
+
 .highlight {
     border-color: var(--focus);
     box-shadow: inset 0 1px var(--focus-subtle),inset 0 -1px #ffffff0f,0 8px 24px #00000059;
@@ -46,6 +56,16 @@
 
 .btn:hover {
     background-color: var(--secondary-background);
+}
+
+.svg-icon {
+    width: .875rem;
+    height: .875rem;
+    display: block;
+    margin-right: 4px;
+    fill: none;
+    stroke: var(--text-color);
+    stroke-width: 2;
 }
 
 /* General */
@@ -98,6 +118,33 @@ nav {
     display: flex;
     flex-direction: row;
     gap: 12px;
+}
+
+#nav-right.hidden {
+    display: none;
+}
+
+#accountMenu {
+    z-index: 2;
+    position: absolute;
+    right: 12px;
+    top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0;
+    min-width: 144px;
+    pointer-events: none;
+    transform: translateY(-32px);
+    border-radius: 6px;
+    padding: 12px;
+    transition: transform .5s, opacity .5s;
+}
+
+#accountMenu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
 }
 
 /* Main */
