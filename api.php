@@ -22,7 +22,7 @@ if (isset($_GET['get_ideas'])) {
         if (!$row['approved']) continue;
         $data[] = array(
             "id" => intval($row['id']),
-            "idea" => $row['idea'],
+            "text" => $row['idea'],
             "votes_yes" => intval($row['votes_yes']),
             "votes_no" => intval($row['votes_no'])
         );
