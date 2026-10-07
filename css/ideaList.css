@@ -1,0 +1,66 @@
+#ideaList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.idea {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 16px;
+    padding-block: 12px;
+    border-radius: 6px;
+}
+
+.ideaText {
+    margin: 0;
+}
+
+.ideaVotes {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+    align-self: flex-start;
+}
+
+.ideaVotes > button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    width: 40px;
+    font-family: "CodenameCoderFree4F-Bold", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.25rem;
+    aspect-ratio: calc(1/1);
+    background-color: var(--primary-background);
+    color: inherit;
+    border: 1px solid var(--secondary-background);
+    border-radius: 4px;
+}
+
+.ideaVotes > button.voteYes {
+    border-color: #21e051;
+}
+.ideaVotes > button.voteNo {
+    border-color: #f81e1e;
+}
+.ideaVotes > button.voteYes:not(:disabled) {
+    box-shadow: 0 0 8px #21e05140, inset 0 0 8px #21e05140;
+}
+.ideaVotes > button.voteNo:not(:disabled) {
+    box-shadow: 0 0 8px #f81e1e60, inset 0 0 8px #f81e1e60;
+}
+.ideaVotes > button.voteYes.voted {
+    background-color: #21e05120;
+    color: #21e051;
+    cursor: default;
+}
+.ideaVotes > button.voteNo.voted {
+    background-color: #f81e1e20;
+    color: #f81e1e;
+    cursor: default;
+}

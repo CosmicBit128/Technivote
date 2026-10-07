@@ -1,5 +1,5 @@
 // const ROOT = "https://adegdansk.pl/cosmic/technivote/api.php";
-const ROOT = "http://localhost/api/api.php";
+const ROOT = "http://localhost/api.php";
 
 /**
  * Fetches JSON from an URL
@@ -40,4 +40,16 @@ export async function castVote(id, voteYes) {
 
 export async function logout() {
     return await fetch_json(`${ROOT}?logout`);
+}
+
+export async function createIdea(idea) {
+    return await fetch_json(`${ROOT}?create_idea=${encodeURIComponent(idea)}`)
+}
+
+export async function getUnapproved() {
+    return await fetch_json(`${ROOT}?get_unapproved`);
+}
+
+export async function review(id, approved) {
+    return fetch_json(`${ROOT}?review=${id}&res=${approved?"approved":"discarded"}`);
 }

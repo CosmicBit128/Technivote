@@ -1,5 +1,9 @@
 RewriteEngine On
 
-RewriteRule ^login\.html$ /login [L]
-RewriteRule ^admin-panel\.php$ /admin-panel [L]
-RewriteRule ^give-idea\.php$ /give-idea [L]
+<Files "db.php">
+    Require all denied
+</Files>
+
+RewriteRule ^login\.html$ /login [QSA,L]
+RewriteRule ^admin-panel\.php$ /admin-panel [QSA,L]
+RewriteRule ^give-idea\.php$ /give-idea [QSA,L]

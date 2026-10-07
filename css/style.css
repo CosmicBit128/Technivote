@@ -13,7 +13,7 @@
     --text-color: #fff;
     --subtle: #9ea2a8;
     --focus: #0affa9;
-    --focus-subtle: rgb(10 255 198 / 0.31);
+    --focus-subtle: #0AFFC64F;
 
     --glass-blur: 6px;
 }
@@ -101,7 +101,7 @@ nav {
     backdrop-filter: blur(var(--glass-blur, 8px)) saturate(1.6);
     background-color: var(--primary-background);
     border-bottom: 1px solid #ffffff2e;
-    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px 4px #00000080;
 }
 
 #title {
@@ -120,7 +120,10 @@ nav {
     gap: 12px;
 }
 
-#nav-right.hidden {
+#nav-right:not(.logged-in) > .show-logged-in {
+    display: none;
+}
+#nav-right.logged-in > .hide-logged-in {
     display: none;
 }
 

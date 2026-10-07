@@ -14,7 +14,7 @@ window.onload = () => {
     document.getElementById("logout").addEventListener("click", () => {
         logout().then((res) => {
             if (res.status === "yay") {
-                location.href = "/login.html";
+                location.href = "/login";
             } else if (res.status === "login") {
                 alert("musisz byc zalogowany zeby sie wylogowac!! duh");
             }
@@ -22,7 +22,7 @@ window.onload = () => {
     });
 
     if (typeof currentUser !== "undefined") {
-        document.getElementById('nav-right').classList.remove('hidden');
+        document.getElementById('nav-right').classList.add('logged-in');
     }
 
     /**
@@ -42,7 +42,7 @@ window.onload = () => {
             if (res.status === "error") {
                 console.error("Couldn't cast vote:", res.error);
             } else if (res.status === "login") {
-                location.href = "/login.html";
+                location.href = "/login";
             } else if (res.status === "voted") {
                 alert("You already voted for this!");
             } else if (res.status === "no_exist") {
@@ -60,7 +60,7 @@ window.onload = () => {
     }
 
     document.getElementById("logInButton").addEventListener("click", () => {
-        location.href = "login.html";
+        location.href = "/login";
     });
     document.getElementById("loginDisclaimerClose").addEventListener("click", () => {
         loginWrapper.classList.remove("open");

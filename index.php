@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/ideaList.css">
     <script type="module" src="js/main.js"></script>
 </head>
 <body data-page="home">
@@ -25,10 +26,11 @@
     </div>
     <nav>
         <h1 id="title">Technivote</h1>
-        <div id="nav-right" class="hidden">
+        <div id="nav-right">
 <?php if (isset($user_id) && $_SESSION['is_admin']) echo "            <a class=\"btn glass pill\" href=\"admin-panel.php\">Admin Panel</a>\n"; ?>
-            <a class="btn glass pill hide-on-mobile" href="give-idea.php" aria-label="Nowe głosowanie">Daj pomysł</a>
-            <div class="account">
+            <a class="btn glass pill show-logged-in" href="give-idea.php" aria-label="Stwórz nowy pomysł">Daj pomysł</a>
+            <a class="btn glass pill hide-logged-in" href="login">Zaloguj Się</a>
+            <div class="account show-logged-in">
                 <button id="accountToggle" class="btn glass pill" aria-haspopup="true" aria-expanded="false" aria-controls="accountMenu">
                     <img src="res/user.svg" alt="" class="svg-icon">
                     <?php if (isset($user_id, $user_name)) echo $user_name."\n"; ?>

@@ -3,29 +3,30 @@ window.addEventListener("load", () => {
     const passwordInput = document.getElementById("pass");
     const error = document.getElementById("error");
 
-    document.getElementById("submitButton").addEventListener("click", () => {
-        // fetch("https://adegdansk.pl/cosmic/technivote/api/login.php", {
-        fetch("http://localhost/api/login.php", {
+    document.getElementById("submitButton").addEventListener("click", (e) => {
+        e.preventDefault();
+
+        fetch("./api.php", {
             method: "POST",
             credentials: "include",
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: new URLSearchParams({
+            body: JSON.stringify({
                 login: loginInput.value,
                 pass: passwordInput.value
             }),
-        }).then((value) => {
-            value.json().then((res)=> {
+        })
+            .then((value) => value.json())
+            .then((res) => {
                 console.log(res);
-                if (res.status === "yay") {
+                if (res.status === "login" || res.status === "yay") {
                     location.href = "/";
-                    console.log("redirect");
                 } else if (res.status === "wrong" || res.status === "error") {
                     error.textContent = res.error;
                     error.classList.add("open");
                 }
-            })
-        });
+            });
     });
 });

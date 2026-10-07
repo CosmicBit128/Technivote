@@ -41,9 +41,6 @@ if (!$conn || !mysqli_real_connect($conn, $db_host, $db_user, $db_pass, $db_name
 
 mysqli_set_charset($conn, 'utf8mb4');
 
-// NOTE: Make sure your database column for the password hash is named 'password'
-// (In your code you checked $user['pass'], but selected 'password AS password' or similar.
-// Ensure it matches your DB schema. Here I use $user['password'].)
 $stmt = mysqli_prepare($conn, 'SELECT id, username, password, admin FROM users WHERE username = ? LIMIT 1');
 
 if (!$stmt) {
@@ -73,6 +70,5 @@ $_SESSION['user_id'] = (int)$user['id'];
 $_SESSION['user_name'] = $user['username'];
 $_SESSION['is_admin'] = (bool)$user['admin'];
 
-http_response_code(200);
-echo json_encode([ "status" => "yay", "user" => $_SESSION['user_id'] ]);
+echo json_encode([ "status" => "yay" ]);
 exit;
