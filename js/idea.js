@@ -32,9 +32,9 @@ window.onload = () => {
             if (res.status === "empty") {
                 alert("wpisz cos");
             } else if (res.status === "login") {
-                location.href = "/login";
+                location.href = "login";
             } else if (res.status === "yay") {
-                location.href = "/";
+                location.href = ".";
             }
         });
     });
@@ -42,7 +42,7 @@ window.onload = () => {
     document.getElementById("logout").addEventListener("click", () => {
         logout().then((res) => {
             if (res.status === "yay") {
-                location.href = "/login";
+                location.href = "login";
             } else if (res.status === "login") {
                 alert("musisz byc zalogowany zeby sie wylogowac!! duh");
             }

@@ -1,10 +1,12 @@
 <?php
     require_once "db.php";
 
+    $currentUser = 'null';
+
     if (isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
         $user_name = $_SESSION['user_name'];
-        echo("<script> const currentUser = $user_id; /* php stuff */</script>\n");
+        $currentUser = $user_id;
     }
 ?>
 <!DOCTYPE html>
@@ -17,6 +19,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/ideaList.css">
+    <script> const currentUser = <?= $currentUser ?>;</script>
     <script type="module" src="js/main.js"></script>
 </head>
 <body data-page="home">

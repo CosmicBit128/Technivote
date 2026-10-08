@@ -14,14 +14,14 @@ window.onload = () => {
     document.getElementById("logout").addEventListener("click", () => {
         logout().then((res) => {
             if (res.status === "yay") {
-                location.href = "/login";
+                location.href = "login";
             } else if (res.status === "login") {
                 alert("musisz byc zalogowany zeby sie wylogowac!! duh");
             }
         });
     });
 
-    if (typeof currentUser !== "undefined") {
+    if (currentUser) {
         document.getElementById('nav-right').classList.add('logged-in');
     }
 
@@ -42,7 +42,7 @@ window.onload = () => {
             if (res.status === "error") {
                 console.error("Couldn't cast vote:", res.error);
             } else if (res.status === "login") {
-                location.href = "/login";
+                location.href = "login";
             } else if (res.status === "voted") {
                 alert("You already voted for this!");
             } else if (res.status === "no_exist") {
@@ -51,23 +51,24 @@ window.onload = () => {
                 if (voteYes) {
                     yesButton.classList.add("voted");
                     yesButton.disabled = true;
+                    yesButton.textContent = parseInt(yesButton.textContent)+1;
                 } else {
                     noButton.classList.add("voted");
                     noButton.disabled = true;
+                    noButton.textContent = parseInt(noButton.textContent)+1;
                 }
             }
         });
     }
 
     document.getElementById("logInButton").addEventListener("click", () => {
-        location.href = "/login";
+        location.href = "login";
     });
     document.getElementById("loginDisclaimerClose").addEventListener("click", () => {
         loginWrapper.classList.remove("open");
     });
 
     getIdeas().then((ideas) => {
-        console.log(ideas);
         ideas.forEach((idea) => {
             const ideaEl = document.createElement('div');
             ideaEl.classList.add("idea", "glass");

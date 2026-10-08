@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id']) || !$_SESSION['is_admin']) {
     echo("<script> const currentUser = $user_id; </script>");
 }
 ?>
-<html lang="pl">z
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

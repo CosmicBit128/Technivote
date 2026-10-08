@@ -20,9 +20,8 @@ window.addEventListener("load", () => {
         })
             .then((value) => value.json())
             .then((res) => {
-                console.log(res);
                 if (res.status === "login" || res.status === "yay") {
-                    location.href = "/";
+                    location.href = ".";
                 } else if (res.status === "wrong" || res.status === "error") {
                     error.textContent = res.error;
                     error.classList.add("open");

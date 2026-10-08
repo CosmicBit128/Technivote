@@ -1,5 +1,4 @@
-// const ROOT = "https://adegdansk.pl/cosmic/technivote/api.php";
-const ROOT = "http://localhost/api.php";
+const ROOT = "api.php";
 
 /**
  * Fetches JSON from an URL

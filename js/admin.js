@@ -24,7 +24,7 @@ window.onload = () => {
     document.getElementById("logout").addEventListener("click", () => {
         logout().then((res) => {
             if (res.status === "yay") {
-                location.href = "/login";
+                location.href = "login";
             } else if (res.status === "login") {
                 alert("musisz byc zalogowany zeby sie wylogowac!! duh");
             }
@@ -39,9 +39,8 @@ window.onload = () => {
     cross.src = "res/discard.svg";
     cross.alt = "Discard";
     getUnapproved().then((res) => {
-        console.log(res);
         if (res.status === "admin") {
-            location.href = "/login";
+            location.href = "login";
         } else if (res.status === "yay") {
             res.ideas.forEach((idea) => {
                 const ideaEl = document.createElement('div');

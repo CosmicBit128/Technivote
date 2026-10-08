@@ -28,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $raw = file_get_contents('php://input');
     $data = json_decode($raw, true);
 
-    if (isset($_POST['login'], $_POST['pass'])) {
+    if (isset($data['login']) && isset($data['pass'])) {
         if (isset($_SESSION['user_id'])) {
             echo json_encode([ "status" => "login" ]);
             exit;
         }
 
-        $username = trim((string)$_POST['login']);
-        $password = (string)$_POST['pass'];
+        $username = trim((string)$data['login']);
+        $password = (string)$data['pass'];
 
         if ($username === '' || $password === '' || strlen($username) > 64 || strlen($password) > 64) {
             http_response_code(400);
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        $stmt = mysqli_prepare($conn, 'SELECT id, username, password, admin FROM users WHERE username = ? LIMIT 1');
+        $stmt = mysqli_prepare($conn, 'SELECT id, username, password, admin FROM tv_users WHERE username = ? LIMIT 1');
         if (!$stmt) {
             http_response_code(500);
             echo json_encode(["status" => "error", "error" => "Internal server error!"]);
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     http_response_code(400);
-    echo json_encode([ "status" => "error", "error" => "Bad request!", "post" => $_POST ]);
+    echo json_encode([ "status" => "error", "error" => "Bad request!", "data" => $data ]);
     exit;
 }
 
@@ -88,7 +88,7 @@ if (isset($_GET['get_ideas'])) {
            sum(if(v.vote_yes = true, 1, 0)) as votes_yes,
            sum(if(v.vote_yes = false, 1, 0)) as votes_no, 
            max(if(v.user_id = ?, v.vote_yes, null)) as user_vote
-    from ideas i left join votes v on i.id = v.idea_id
+    from tv_ideas i left join tv_votes v on i.id = v.idea_id
     where i.approved = 1 and i.discarded = 0
     group by i.id, i.idea;
     ");
@@ -130,7 +130,7 @@ if (isset($_GET['cast_vote']) && isset($_GET['yes'])) {
     $user_id = (int)$_SESSION['user_id'];
 
     // Check if already voted
-    $vote_check_stmt = mysqli_prepare($conn, "select id from votes where user_id = ? and idea_id = ? limit 1;");
+    $vote_check_stmt = mysqli_prepare($conn, "select id from tv_votes where user_id = ? and idea_id = ? limit 1;");
     if (!$vote_check_stmt) {
         echo json_encode(["status" => "error", "error" => "Internal server error!"]);
         exit;
@@ -143,7 +143,7 @@ if (isset($_GET['cast_vote']) && isset($_GET['yes'])) {
     }
 
     // Check if idea exists
-    $exist_check_stmt = mysqli_prepare($conn, "select * from ideas where id = ? and approved = 1 and discarded = 0 limit 1;");
+    $exist_check_stmt = mysqli_prepare($conn, "select * from tv_ideas where id = ? and approved = 1 and discarded = 0 limit 1;");
     if (!$exist_check_stmt) {
         echo json_encode(["status" => "error", "error" => "Internal server error!"]);
         exit;
@@ -156,7 +156,7 @@ if (isset($_GET['cast_vote']) && isset($_GET['yes'])) {
     }
 
     // Vote
-    $vote_stmt = mysqli_prepare($conn, "insert into votes (user_id, idea_id, vote_yes) values (?, ?, ?)");
+    $vote_stmt = mysqli_prepare($conn, "insert into tv_votes (user_id, idea_id, vote_yes) values (?, ?, ?)");
     if (!$vote_stmt) {
         echo json_encode(["status" => "error", "error" => "Internal server error!"]);
         exit;
@@ -194,7 +194,7 @@ if (isset($_GET['create_idea'])) {
         exit;
     }
 
-    $stmt = mysqli_prepare($conn, "insert into ideas (idea, created_by) values (?, ?)");
+    $stmt = mysqli_prepare($conn, "insert into tv_ideas (idea, created_by) values (?, ?)");
     if (!$stmt) {
         echo json_encode(["status" => "error", "error" => "Internal server error!"]);
         exit;
@@ -216,7 +216,7 @@ if (isset($_GET['get_unapproved'])) {
         exit;
     }
 
-    $stmt = mysqli_prepare($conn, "select id, idea, created from ideas where approved = 0 and discarded = 0 order by created;");
+    $stmt = mysqli_prepare($conn, "select id, idea, created from tv_ideas where approved = 0 and discarded = 0 order by created;");
     if (!$stmt) {
         echo json_encode([ "status" => "error", "error" => "Internal server error!" ]);
         exit;
@@ -252,7 +252,7 @@ if (isset($_GET['review'], $_GET['res'])) {
         http_response_code(400);
         exit;
     }
-    $stmt = mysqli_prepare($conn, "update ideas set $res = 1 WHERE id = ?");
+    $stmt = mysqli_prepare($conn, "update tv_ideas set $res = 1 WHERE id = ?");
     if (!$stmt) {
         echo json_encode(["status" => "error", "error" => "Internal server error!"]);
         exit;
